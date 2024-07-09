@@ -9,10 +9,8 @@ import Foundation
 extension String {
 	/// Returns `self.prefix(4)` interpreted as a four character code
 	public var fourCC: UInt32 {
-		var fourcc: UInt32 = 0
-		for uc in prefix(4).unicodeScalars {
-			fourcc = (fourcc << 8) + (uc.value & 0xff)
+		prefix(4).unicodeScalars.reduce(0) {
+			($0 << 8) + ($1.value & 0xff)
 		}
-		return fourcc
 	}
 }
