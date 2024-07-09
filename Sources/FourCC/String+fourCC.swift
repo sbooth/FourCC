@@ -10,7 +10,7 @@ extension String {
 	/// Returns `self.prefix(4)` interpreted as a four character code
 	public var fourCC: UInt32 {
 		prefix(4).unicodeScalars.reduce(0) {
-			($0 << 8) + ($1.value & 0xff)
+			($0 << 8) | ($1.value & 0xff)
 		}
 	}
 }
