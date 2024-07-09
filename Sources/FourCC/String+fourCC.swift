@@ -7,7 +7,7 @@
 import Foundation
 
 extension String {
-	/// Returns `self.prefix(4)` interpreted as a four character code
+	/// Returns the first four characters of `self` as a four character code value.
 	public var fourCC: UInt32 {
 		prefix(4).unicodeScalars.reduce(0) {
 			($0 << 8) | ($1.value & 0xff)

@@ -7,7 +7,7 @@
 import Foundation
 
 extension UInt32 {
-	/// Returns the value of `self` interpreted as a four character code
+	/// Returns the value of `self` as a four character code string.
 	public var fourCC: String {
 		String(cString: [
 			UInt8(self >> 24),
