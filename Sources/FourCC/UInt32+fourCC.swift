@@ -9,13 +9,12 @@ import Foundation
 extension UInt32 {
 	/// Returns the value of `self` interpreted as a four character code
 	public var fourCC: String {
-		let chars: [UInt8] = [
-			UInt8((self >> 24) & 0xff),
+		String(cString: [
+			UInt8(self >> 24),
 			UInt8((self >> 16) & 0xff),
 			UInt8((self >> 8) & 0xff),
 			UInt8(self & 0xff),
 			0
-		]
-		return String(cString: chars)
+		])
 	}
 }
