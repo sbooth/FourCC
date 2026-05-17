@@ -7,7 +7,12 @@
 import Foundation
 
 extension UInt32 {
-	/// Returns the value of `self` as a four character code string.
+	/// Decodes `self` into a four-character code string.
+	///
+	/// This property treats the `UInt32` as a four-byte buffer ordered in big-endian byte order.
+	/// It attempts to decode these four bytes into a readable string using the UTF-8 codec.
+	///
+	/// - returns: A `String` representation of the four bytes in `self`.
 	public var fourCC: String {
 		let value = self.bigEndian
 		return withUnsafeBytes(of: value) { buffer in
