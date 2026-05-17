@@ -10,9 +10,10 @@ extension String {
 	/// Returns the first four characters of `self` as a four character code value.
 	public var fourCC: UInt32 {
 		var result: UInt32 = 0
-		for byte in utf8.prefix(4) {
-			result = (result << 8) | UInt32(byte)
+		let bytes = self.utf8.prefix(4)
+		withUnsafeMutableBytes(of: &result) { buffer in
+			buffer.copyBytes(from: bytes)
 		}
-		return result
+		return UInt32(bigEndian: result)
 	}
 }
