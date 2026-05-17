@@ -1,5 +1,5 @@
 //
-// Copyright © 2020-2024 Stephen F. Booth <me@sbooth.org>
+// Copyright © 2020-2026 Stephen F. Booth <me@sbooth.org>
 // Part of https://github.com/sbooth/FourCC
 // MIT license
 //
@@ -7,14 +7,16 @@
 import Foundation
 
 extension UInt32 {
-	/// Returns the value of `self` as a four character code string.
+	/// Decodes `self` into a four-character code string.
+	///
+	/// This property treats the `UInt32` as a four-byte buffer ordered in big-endian byte order.
+	/// It attempts to decode these four bytes into a readable string using the UTF-8 codec.
+	///
+	/// - returns: A `String` representation of the four bytes in `self`.
 	public var fourCC: String {
-		String(cString: [
-			UInt8(self >> 24),
-			UInt8((self >> 16) & 0xff),
-			UInt8((self >> 8) & 0xff),
-			UInt8(self & 0xff),
-			0
-		])
+		let value = self.bigEndian
+		return withUnsafeBytes(of: value) { buffer in
+			String(decoding: buffer, as: UTF8.self)
+		}
 	}
 }
